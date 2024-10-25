@@ -36,7 +36,7 @@ I consider my personal Home Assistant configuration an active open-source projec
 So if you feel like adding an improvement, feel free to contribute.
 
 We have set up a separate document containing our
-[contribution guidelines](CONTRIBUTING.md).
+[contribution guidelines](.github/CONTRIBUTING.md).
 
 Thank you for being involved! :heart_eyes:
 
@@ -51,7 +51,7 @@ check [the contributor's page][contributors].
 
 MIT License
 
-Copyright (c) 2018-2020 Franck Nijhof
+Copyright (c) 2018-2022 Franck Nijhof
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

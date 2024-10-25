@@ -14,15 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⤵️ Check out configuration from GitHub
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4.2.2
       - name: 🚀 Run yamllint
-        uses: frenck/action-yamllint@v1.1.1
+        uses: frenck/action-yamllint@v1.5.0
 
   remarklint:
     runs-on: ubuntu-18.04
     steps:
       - name: ⤵️ Check out configuration from GitHub
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4.2.2
       - name: Running Remark lint
         uses: "docker://pipelinecomponents/remark-lint:latest"
         continue-on-error: true
@@ -38,12 +38,12 @@ jobs:
         version: ["stable", "beta", "dev"]
     steps:
       - name: ⤵️ Check out configuration from GitHub
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4.2.2
       - name: 🚀 Run Home Assistant Configuration Check
-        uses: frenck/action-home-assistant@v1.1.1
+        uses: frenck/action-home-assistant@v1.4
         with:
-          path: "./config"
-          secrets: ./.stubs/secrets.yaml
+          path: "."
+          secrets: ./secrets.fake.yaml
           version: "${{ matrix.version }}"
 
   esphome:
@@ -51,9 +51,9 @@ jobs:
     needs: [yamllint]
     steps:
       - name: ⤵️ Check out configuration from GitHub
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4.2.2
       - name: Set up Python 3.7
-        uses: actions/setup-python@v2.3.0
+        uses: actions/setup-python@v5
         with:
           python-version: 3.7
       - name: Install dependencies
@@ -62,8 +62,8 @@ jobs:
           pip install esphome
           pip list
           esphome version
-      - name: Copy stub files into configuration folder
-        run: cp -R ./.stubs/* ./config/esphome/
+      - name: Copy secrets stub into configuration folder
+        run: cp ./secrets.fake.yaml ./esphome/secrets.yaml
       - name: Run esphome on all files
         # yamllint disable rule:line-length
         run: |
